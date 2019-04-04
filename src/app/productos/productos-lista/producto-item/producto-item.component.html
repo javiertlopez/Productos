@@ -8,15 +8,15 @@
   </div>
   <div class="media-right ml-2">
     <!-- EL BOTON DE SELECCIONAR DEBE APARECER solo en /productos -->
-    <div class="row">
+    <div class="row" *ngIf="isProduct">
       <label class="btn btn-primary active">
-        <input type="checkbox" name="" id="" autocomplete="off"> </label>
+        <input type="checkbox" name="" id="" autocomplete="off" (click)="selectProducto($event)"> </label>
     </div>
     <div class="row">
       <a name="" id="" class="btn btn-primary" href="#" role="button"><i class="fas fa-search"></i></a>
     </div>
     <!-- EL BOTON DE BORRAR SIGUIENTE SOLO DEBE APARECER EN CARRITO DE COMPRA -->
-    <div class="row mt-1">
+    <div class="row mt-1" *ngIf="!isProduct">
       <a name="" id="" class="btn btn-primary" href="#" role="button"><i class="fas fa-trash-alt"></i></a>
     </div>
   </div>
