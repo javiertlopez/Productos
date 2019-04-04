@@ -1,0 +1,11 @@
+<div class="media-list lista justify-content-left">
+    <h4 *ngIf="isProduct">Lista de Productos</h4>
+    <h4 *ngIf="!isProduct">Carrito de compras</h4>
+
+    <a name="" id="" class="btn btn-primary" href="#" role="button" *ngIf="isProduct"><i class="fas fa-plus">Añadir al carrito</i></a>
+
+    <app-producto-item *ngFor="let item of productos" [producto]="item" (emisor)="productoHandler($event)">
+    </app-producto-item>
+
+    <a name="" id="" class="btn btn-primary" href="#" role="button" *ngIf="isProduct"><i class="fas fa-plus">Añadir al carrito</i></a>
+</div>
