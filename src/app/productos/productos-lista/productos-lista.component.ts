@@ -13,6 +13,7 @@ export class ProductosListaComponent implements OnInit {
   cant = 0;
   productos: Producto[];
   carrito: Producto[];
+  carritoTotal = 0;
   selProd: Producto[] = [];
 
   constructor(
@@ -24,6 +25,7 @@ export class ProductosListaComponent implements OnInit {
     this.productos = this.productoService.getProductos();
     this.carrito = this.productoService.getCarrito();
     this.isProduct = this.router.url.slice(1) === 'productos' ? true : false ;
+    this.carritoTotal = this.productoService.getTotalCarrito();
   }
 
   productoHandler(action, prod) {
