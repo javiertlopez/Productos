@@ -10,7 +10,10 @@ import { Producto } from '../Producto';
 })
 export class ProductosListaComponent implements OnInit {
   isProduct: boolean;
+  cant = 0;
   productos: Producto[];
+  carrito: Producto[];
+  selProd: Producto[] = [];
 
   constructor(
     private productoService: ProductoService,
@@ -19,11 +22,22 @@ export class ProductosListaComponent implements OnInit {
 
   ngOnInit() {
     this.productos = this.productoService.getProductos();
+    this.carrito = this.productoService.getCarrito();
     this.isProduct = this.router.url.slice(1) === 'productos' ? true : false ;
   }
 
-  productoHandler(prod) {
-    console.log(prod.id);
-    this.router.navigate([prod.id, 'edit'], { relativeTo: this.route });
+  productoHandler(action, prod) {
+    if (action) {
+      this.selProd.push(prod);
+      this.cant ++;
+    } else {
+      this.selProd.splice(this.selProd.findIndex(item => item.id = prod.id), 1);
+      this.cant --;
+    }
+  }
+
+  addCart() {
+    this.productoService.setCarrito(this.selProd);
   }
 }
+

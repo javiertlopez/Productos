@@ -1,11 +1,32 @@
-<div class="media-list lista justify-content-left">
+<div class="media-list lista mx-auto">
     <h4 *ngIf="isProduct">Lista de Productos</h4>
     <h4 *ngIf="!isProduct">Carrito de compras</h4>
 
-    <a name="" id="" class="btn btn-primary" href="#" role="button" *ngIf="isProduct"><i class="fas fa-plus">Añadir al carrito</i></a>
 
-    <app-producto-item *ngFor="let item of productos" [producto]="item" (emisor)="productoHandler($event)">
-    </app-producto-item>
+    <div *ngIf="isProduct">
+            <div class="btn btn-primary col-sm-6" (click)="addCart()"><i
+                class="fas fa-plus">Añadir al carrito</i></div>
 
-    <a name="" id="" class="btn btn-primary" href="#" role="button" *ngIf="isProduct"><i class="fas fa-plus">Añadir al carrito</i></a>
+        <app-producto-item *ngFor="let item of productos" [producto]="item" [isProduct]="isProduct"
+            (emisor)="productoHandler($event, item)">
+        </app-producto-item>
+
+        <div class="row justify-content-between">
+            <div class="btn btn-primary col-sm-6" (click)="addCart()"><i
+                    class="fas fa-plus">Añadir al carrito</i></div>
+            <h5 class="col-sm-6 mt-2">Cantidad de items: {{ cant }}</h5>
+        </div>
+
+    </div>
+
+    <div *ngIf="!isProduct">
+        <app-producto-item *ngFor="let item of carrito" [producto]="item" [isProduct]="isProduct"
+            (emisor)="productoHandler($event, item)">
+        </app-producto-item>
+
+
+        <div class="row justify-content-between" *ngIf="!isProduct">
+            <h5 class="col-sm-6 mt-2">Cantidad de items: {{ carrito.length }}</h5>
+        </div>
+    </div>
 </div>
